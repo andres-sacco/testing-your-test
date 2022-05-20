@@ -29,8 +29,8 @@ public class CatalogControllerTest {
 
     @BeforeEach
     public void setUp() {
-    	cityService = mock(CityService.class);
-    	countryService = mock(CountryService.class);
+        cityService = mock(CityService.class);
+        countryService = mock(CountryService.class);
         controller = new CatalogController(cityService, countryService);
     }
 
@@ -42,13 +42,10 @@ public class CatalogControllerTest {
         when(cityService.getCityByCode(DEFAULT_CITY_CODE)).thenReturn(city);
         ResponseEntity<CityDTO> response = controller.getCityByCode(DEFAULT_CITY_CODE);
 
-        assertAll(
-                () -> assertNotNull(response),
-                () -> assertEquals(200, response.getStatusCodeValue()),
+        assertAll(() -> assertNotNull(response), () -> assertEquals(200, response.getStatusCodeValue()),
                 () -> assertEquals(DEFAULT_CITY_CODE, response.getBody().getCode()));
     }
-    
-    
+
     @Test
     public void should_return_a_country() {
         CountryDTO country = new CountryDTO();
@@ -57,9 +54,7 @@ public class CatalogControllerTest {
         when(countryService.getCountryByCode(DEFAULT_COUNTRY_CODE)).thenReturn(country);
         ResponseEntity<CountryDTO> response = controller.getCountryByCode(DEFAULT_COUNTRY_CODE);
 
-        assertAll(
-                () -> assertNotNull(response),
-                () -> assertEquals(200, response.getStatusCodeValue()),
+        assertAll(() -> assertNotNull(response), () -> assertEquals(200, response.getStatusCodeValue()),
                 () -> assertEquals(DEFAULT_COUNTRY_CODE, response.getBody().getCode()));
     }
 }

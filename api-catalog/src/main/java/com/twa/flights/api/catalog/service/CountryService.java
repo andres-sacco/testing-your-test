@@ -25,8 +25,8 @@ public class CountryService {
     }
 
     public CountryDTO getCountryByCode(String code) {
-    	Country country = countryRepository.findByCode(code);
-    	
+        Country country = countryRepository.findByCode(code);
+
         if (country == null) {
             throw new APIException(HttpStatus.NOT_FOUND, ExceptionStatus.COUNTRY_NOT_FOUND.getCode(),
                     ExceptionStatus.COUNTRY_NOT_FOUND.getMessage());

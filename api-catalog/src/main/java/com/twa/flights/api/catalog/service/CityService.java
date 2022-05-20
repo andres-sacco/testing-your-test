@@ -26,7 +26,7 @@ public class CityService {
 
     public CityDTO getCityByCode(String code) {
         City city = cityRepository.findByCode(code);
-        
+
         if (city == null) {
             throw new APIException(HttpStatus.NOT_FOUND, ExceptionStatus.CITY_NOT_FOUND.getCode(),
                     ExceptionStatus.CITY_NOT_FOUND.getMessage());
