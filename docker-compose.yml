@@ -1,0 +1,46 @@
+version: '3.0'
+services:
+  jenkins:
+    build: ./jenkins
+    restart: always
+    ports:
+      - "18080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - jenkins-data:/var/lib/jenkins/
+    depends_on:
+      - sonar
+    environment:
+      - SONAR_PORT=9000
+      - SONAR_DB_PORT=5432
+
+  sonardb:
+    image: postgres:9.6
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - ./sonar/db:/var/lib/postgresql/data
+
+  sonar:
+    image: sonarqube:8.9-community
+    restart: always
+    ports:
+      - "19000:9000"
+      - "19092:9092"
+    depends_on:
+      - sonardb
+    volumes:
+      - ./sonar/data:/opt/sonarqube/data
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://sonardb:5432/sonar
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar
+      - SONARQUBE_ADMIN_PASSWORD=admin
+
+volumes:
+  jenkins-data:

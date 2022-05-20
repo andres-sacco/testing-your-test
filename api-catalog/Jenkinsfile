@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.3'
+    }
+    stages {
+            stage('Compile') {
+                steps {
+                    dir('api-catalog') {
+                        sh 'mvn clean compile'
+                    }
+                }
+
+            }
+            stage('Unit Test') {
+                steps {
+                    dir('api-catalog') {
+                        sh 'mvn test'
+                    }
+                }
+            }
+            stage('Quality') {
+                steps {
+                    dir('api-catalog') {
+                        sh 'mvn sonar:sonar -Dsonar.projectKey=api_catalog -Dsonar.host.url=http://sonar:9000 -Dsonar.login=c35e593688f22c115d459c2ffa1a8c37576f10ab'
+                    }
+                }
+            }
+            stage('Package') {
+                steps {
+                    dir('api-catalog') {
+                        sh 'mvn -B -DskipTests package'
+                    }
+                }
+            }
+    }
+}
