@@ -42,7 +42,7 @@
 		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 		<spring-boot-maven-plugin.version>2.4.2</spring-boot-maven-plugin.version>
 		
-		<sonar.coverage.exclusions>**/dto/*,**/exception/*,**/model/*,**/enums/*,**/repository/*</sonar.coverage.exclusions>
+		<sonar.coverage.exclusions>**/dto/*,**/exception/*,**/model/*,**/enums/*,**/repository/*,**/configuration/WebConfiguration.java</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencyManagement>
