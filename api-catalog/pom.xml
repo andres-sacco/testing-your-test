@@ -39,7 +39,10 @@
 		<guava.version>30.1.1-jre</guava.version>
 
 		<!-- Maven plugins -->
+		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 		<spring-boot-maven-plugin.version>2.4.2</spring-boot-maven-plugin.version>
+		
+		<sonar.coverage.exclusions>**/dto/*,**/exception/*,**/model/*,**/enums/*,**/repository/*</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencyManagement>
@@ -183,6 +186,27 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<phase>test-compile</phase>
+					</execution>
+					<execution>
+						<id>report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<phase>test</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<repositories>
@@ -195,6 +219,6 @@
 			<id>maven2</id>
 			<name>maven2</name>
 			<url>https://repo.maven.apache.org/maven2</url>
-		</repository> 
+		</repository>
 	</repositories>
 </project>
