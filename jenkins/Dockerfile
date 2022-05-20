@@ -23,11 +23,6 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 
 # Adding default Jenkins Jobs
 COPY jobs/API-Catalog.xml /usr/share/jenkins/ref/jobs/API-Catalog/config.xml
-COPY jobs/API-Clusters.xml /usr/share/jenkins/ref/jobs/API-Clusters/config.xml
-COPY jobs/API-Itineraries-Search.xml /usr/share/jenkins/ref/jobs/API-Itineraries-Search/config.xml
-COPY jobs/API-Pricing.xml /usr/share/jenkins/ref/jobs/API-Pricing/config.xml
-COPY jobs/API-Provider-Alpha.xml /usr/share/jenkins/ref/jobs/API-Provider-Alpha/config.xml
-COPY jobs/API-Provider-Beta.xml /usr/share/jenkins/ref/jobs/API-Provider-Beta/config.xml
 
 ############################################
 # Configure Jenkins
