@@ -34,7 +34,7 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>https://github.com/behind-code-lines/twa-api</url>
+          <url>https://github.com/andres-sacco/heisenbugconf</url>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
@@ -44,7 +44,7 @@
       </branches>
       <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
       <browser class="hudson.plugins.git.browser.CGit">
-        <url>https://github.com/behind-code-lines/twa-api</url>
+          <url>https://github.com/andres-sacco/heisenbugconf</url>
       </browser>
       <submoduleCfg class="empty-list"/>
       <extensions>
