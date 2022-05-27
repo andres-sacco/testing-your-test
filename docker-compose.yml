@@ -41,6 +41,16 @@ services:
       - SONARQUBE_JDBC_USERNAME=sonar
       - SONARQUBE_JDBC_PASSWORD=sonar
       - SONARQUBE_ADMIN_PASSWORD=admin
+  
+  api-catalog-db:
+    container_name: api-catalog-db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'flights_catalog'
+      MYSQL_ROOT_PASSWORD: 'muppet'
+    ports:
+     - 3310:3306    
 
 volumes:
   jenkins-data:
