@@ -45,7 +45,6 @@ public class CountryServiceTest {
         when(countryRepository.findByCode(DEFAULT_COUNTRY_CODE)).thenReturn(getCountryModel());
         
         CountryDTO response = countryService.getCountryByCode(DEFAULT_COUNTRY_CODE);
-        assertAll(() -> assertNotNull(response));
     }
 
     private Country getCountryModel() {
