@@ -12,38 +12,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
-import com.twa.flights.api.catalog.dto.CityDTO;
 import com.twa.flights.api.catalog.dto.CountryDTO;
-import com.twa.flights.api.catalog.service.CityService;
 import com.twa.flights.api.catalog.service.CountryService;
 
 @ExtendWith(MockitoExtension.class)
-public class CatalogControllerTest {
+public class CountryControllerTest {
 
-    private static final String DEFAULT_CITY_CODE = "BUE";
     private static final String DEFAULT_COUNTRY_CODE = "AR";
-
-    private CityService cityService;
     private CountryService countryService;
-    private CatalogController controller;
+    private CountryController controller;
 
     @BeforeEach
     public void setUp() {
-        cityService = mock(CityService.class);
         countryService = mock(CountryService.class);
-        controller = new CatalogController(cityService, countryService);
-    }
-
-    @Test
-    public void should_return_a_city() {
-        CityDTO city = new CityDTO();
-        city.setCode(DEFAULT_CITY_CODE);
-
-        when(cityService.getCityByCode(DEFAULT_CITY_CODE)).thenReturn(city);
-        ResponseEntity<CityDTO> response = controller.getCityByCode(DEFAULT_CITY_CODE);
-
-        assertAll(() -> assertNotNull(response), () -> assertEquals(200, response.getStatusCodeValue()),
-                () -> assertEquals(DEFAULT_CITY_CODE, response.getBody().getCode()));
+        controller = new CountryController(countryService);
     }
 
     @Test
@@ -54,7 +36,8 @@ public class CatalogControllerTest {
         when(countryService.getCountryByCode(DEFAULT_COUNTRY_CODE)).thenReturn(country);
         ResponseEntity<CountryDTO> response = controller.getCountryByCode(DEFAULT_COUNTRY_CODE);
 
-        assertAll(() -> assertNotNull(response), () -> assertEquals(200, response.getStatusCodeValue()),
+        assertAll(() -> assertNotNull(response),
+                () -> assertEquals(200, response.getStatusCodeValue()),
                 () -> assertEquals(DEFAULT_COUNTRY_CODE, response.getBody().getCode()));
     }
 }

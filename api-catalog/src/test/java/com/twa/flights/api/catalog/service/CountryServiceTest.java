@@ -1,9 +1,14 @@
 package com.twa.flights.api.catalog.service;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.twa.flights.api.catalog.dto.ContinentDTO;
+import com.twa.flights.api.catalog.dto.CountryDTO;
+import com.twa.flights.api.catalog.model.Continent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,10 +23,8 @@ import ma.glasnost.orika.MapperFacade;
 @ExtendWith(MockitoExtension.class)
 public class CountryServiceTest {
     private static final String DEFAULT_COUNTRY_CODE = "AR";
-
     private CountryRepository countryRepository;
     private MapperFacade mapper;
-
     private CountryService countryService;
 
     @BeforeEach
@@ -33,8 +36,50 @@ public class CountryServiceTest {
 
     @Test
     public void should_return_an_exception() {
-        Country country = null;
-        when(countryRepository.findByCode(DEFAULT_COUNTRY_CODE)).thenReturn(country);
+        when(countryRepository.findByCode(DEFAULT_COUNTRY_CODE)).thenReturn(null);
         assertThrows(APIException.class, () -> countryService.getCountryByCode(DEFAULT_COUNTRY_CODE));
+    }
+
+    @Test
+    public void should_return_a_country() {
+        when(countryRepository.findByCode(DEFAULT_COUNTRY_CODE)).thenReturn(getCountryModel());
+        
+        CountryDTO response = countryService.getCountryByCode(DEFAULT_COUNTRY_CODE);
+        assertAll(() -> assertNotNull(response));
+    }
+
+    private Country getCountryModel() {
+        Country country = new Country();
+        country.setCode(DEFAULT_COUNTRY_CODE);
+        country.setId(1L);
+        country.setName("Argentina");
+        Continent continent = getContinentModel();
+        country.setContinent(continent);
+        return country;
+    }
+
+    private Continent getContinentModel() {
+        Continent continent = new Continent();
+        continent.setCode("SU");
+        continent.setId(1L);
+        continent.setName("Sud America");
+        return continent;
+    }
+
+
+    private CountryDTO getCountryDTO() {
+        CountryDTO country = new CountryDTO();
+        country.setCode(DEFAULT_COUNTRY_CODE);
+        country.setName("Argentina");
+        ContinentDTO continent = getContinentDTO();
+        country.setContinent(continent);
+        return country;
+    }
+
+    private ContinentDTO getContinentDTO() {
+        ContinentDTO continent = new ContinentDTO();
+        continent.setCode("SU");
+        continent.setName("Sud America");
+        return continent;
     }
 }

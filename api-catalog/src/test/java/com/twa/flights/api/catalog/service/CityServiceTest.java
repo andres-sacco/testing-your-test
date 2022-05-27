@@ -33,8 +33,7 @@ public class CityServiceTest {
 
     @Test
     public void should_return_an_exception() {
-        City city = null;
-        when(cityRepository.findByCode(DEFAULT_CITY_CODE)).thenReturn(city);
+        when(cityRepository.findByCode(DEFAULT_CITY_CODE)).thenReturn(null);
         assertThrows(APIException.class, () -> cityService.getCityByCode(DEFAULT_CITY_CODE));
     }
 }

@@ -1,5 +1,7 @@
 package com.twa.flights.api.catalog.service;
 
+import com.twa.flights.api.catalog.dto.CountryDTO;
+import com.twa.flights.api.catalog.model.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,10 +30,18 @@ public class CityService {
         City city = cityRepository.findByCode(code);
 
         if (city == null) {
-            throw new APIException(HttpStatus.NOT_FOUND, ExceptionStatus.CITY_NOT_FOUND.getCode(),
+            throw new APIException(HttpStatus.NOT_FOUND,
+                    ExceptionStatus.CITY_NOT_FOUND.getCode(),
                     ExceptionStatus.CITY_NOT_FOUND.getMessage());
         }
-
         return mapper.map(city, CityDTO.class);
+    }
+
+    public CityDTO save(CityDTO country) {
+        City entityToPersist = mapper.map(country, City.class);
+
+        City entityToPersisted = cityRepository.save(entityToPersist);
+
+        return mapper.map(entityToPersisted, CityDTO.class);
     }
 }

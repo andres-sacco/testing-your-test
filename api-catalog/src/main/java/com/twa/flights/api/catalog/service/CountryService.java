@@ -14,7 +14,6 @@ import ma.glasnost.orika.MapperFacade;
 
 @Service
 public class CountryService {
-
     CountryRepository countryRepository;
     MapperFacade mapper;
 
@@ -28,10 +27,19 @@ public class CountryService {
         Country country = countryRepository.findByCode(code);
 
         if (country == null) {
-            throw new APIException(HttpStatus.NOT_FOUND, ExceptionStatus.COUNTRY_NOT_FOUND.getCode(),
+            throw new APIException(HttpStatus.NOT_FOUND,
+                    ExceptionStatus.COUNTRY_NOT_FOUND.getCode(),
                     ExceptionStatus.COUNTRY_NOT_FOUND.getMessage());
         }
+        mapper.map(country, CountryDTO.class);
+        return new CountryDTO();
+    }
 
-        return mapper.map(country, CountryDTO.class);
+    public CountryDTO save(CountryDTO country) {
+        Country entityToPersist = mapper.map(country, Country.class);
+
+        Country entityToPersisted = countryRepository.save(entityToPersist);
+
+        return mapper.map(entityToPersisted, CountryDTO.class);
     }
 }
