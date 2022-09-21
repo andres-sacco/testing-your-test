@@ -1,4 +1,4 @@
-# Testing your test - Heisenbug conference
+# Testing your test
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
