@@ -34,7 +34,7 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>https://github.com/andres-sacco/heisenbugconf</url>
+          <url>https://github.com/andres-sacco/testing-your-test</url>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
@@ -44,7 +44,7 @@
       </branches>
       <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
       <browser class="hudson.plugins.git.browser.CGit">
-          <url>https://github.com/andres-sacco/heisenbugconf</url>
+          <url>https://github.com/andres-sacco/testing-your-test</url>
       </browser>
       <submoduleCfg class="empty-list"/>
       <extensions>
