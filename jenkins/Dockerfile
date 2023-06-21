@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.319.3-lts-jdk11
+FROM jenkins/jenkins:2.387.3-lts-jdk11
 
 USER root
 RUN apt-get update \
@@ -19,7 +19,7 @@ USER jenkins
 
 # installing specific list of plugins. see: https://github.com/jenkinsci/docker#preinstalling-plugins
 COPY plugins.txt /usr/share/jenkins/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
+RUN jenkins-plugin-cli -f /usr/share/jenkins/plugins.txt
 
 # Adding default Jenkins Jobs
 COPY jobs/API-Catalog.xml /usr/share/jenkins/ref/jobs/API-Catalog/config.xml
